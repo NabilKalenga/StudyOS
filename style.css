@@ -1222,3 +1222,72 @@ select {
     flex-direction: column;
   }
 }
+
+/* ================================
+   ACCOUNT BUTTONS
+================================ */
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-actions a:hover {
+  transform: translateY(-2px);
+}
+
+.auth-login {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.auth-signup {
+  color: #ffffff;
+  background: linear-gradient(100deg, #7763ff, #4a8dff);
+  box-shadow: 0 0 18px rgba(119, 99, 255, 0.22);
+}
+
+.auth-signup:hover {
+  box-shadow: 0 0 24px rgba(119, 99, 255, 0.45);
+}
+
+@media (max-width: 600px) {
+  .topbar-right {
+    gap: 8px;
+  }
+
+  .auth-actions {
+    gap: 6px;
+  }
+
+  .auth-actions a {
+    min-height: 36px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
