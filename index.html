@@ -13,7 +13,77 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js" defer></script>
+
+  <style>
+    /* Account buttons */
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .auth-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .auth-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 40px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .auth-actions a:hover {
+      transform: translateY(-2px);
+    }
+
+    .auth-login {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .auth-signup {
+      color: #ffffff;
+      background: linear-gradient(100deg, #7763ff, #4a8dff);
+      box-shadow: 0 0 18px rgba(119, 99, 255, 0.22);
+    }
+
+    .auth-signup:hover {
+      box-shadow: 0 0 24px rgba(119, 99, 255, 0.45);
+    }
+
+    @media (max-width: 600px) {
+      .topbar-right {
+        gap: 6px;
+      }
+
+      .auth-actions {
+        gap: 5px;
+      }
+
+      .auth-actions a {
+        min-height: 35px;
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="app-shell">
@@ -56,6 +126,7 @@
   <!-- MAIN CONTENT -->
   <main class="main-area">
 
+    <!-- TOP NAVIGATION -->
     <header class="topbar">
       <button class="mobile-menu icon-button" id="menuToggle">☰</button>
 
@@ -65,6 +136,13 @@
 
       <div class="topbar-right">
         <span class="today-pill" id="todayLabel">Today</span>
+
+        <div class="auth-actions">
+          <a href="login.html" class="auth-login">Log In</a>
+          <a href="signup.html" class="auth-signup">
+            Sign Up <span>→</span>
+          </a>
+        </div>
       </div>
     </header>
 
@@ -411,6 +489,7 @@
       </div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="app-footer">
       <span>StudyOS · Built for your next breakthrough.</span>
       <span>Focus on progress, not perfection.</span>
