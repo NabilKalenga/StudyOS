@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In | StudyOS</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+  <main class="auth-container">
+    <a class="brand" href="index.html">Study<span>OS</span></a>
+
+    <section class="auth-card">
+      <div class="icon">✦</div>
+      <h1>Welcome back!</h1>
+      <p class="subtitle">Log in and continue your learning journey.</p>
+
+      <form id="loginForm">
+        <label for="email">Email address</label>
+        <input id="email" type="email" placeholder="you@example.com"
+               autocomplete="email" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Enter your password"
+               autocomplete="current-password" required>
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+        <button id="loginButton" type="submit">Log in →</button>
+      </form>
+
+      <p class="switch">
+        Don't have an account?
+        <a href="signup.html">Create one</a>
+      </p>
+    </section>
+
+    <p class="footer">Your next level starts here. ✨</p>
+  </main>
+
+  <script type="module" src="login.js"></script>
+</body>
+</html>

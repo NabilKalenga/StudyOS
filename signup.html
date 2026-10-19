@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | StudyOS</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+  <main class="auth-container">
+    <a class="brand" href="index.html">Study<span>OS</span></a>
+
+    <section class="auth-card">
+      <div class="icon">✦</div>
+
+      <h1>Create your account</h1>
+      <p class="subtitle">
+        Your journey to better studying starts here.
+      </p>
+
+      <form id="signupForm">
+        <label for="name">Your name</label>
+        <input
+          id="name"
+          type="text"
+          placeholder="Enter your name"
+          autocomplete="name"
+          required
+        >
+
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required
+        >
+
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="At least 6 characters"
+          autocomplete="new-password"
+          minlength="6"
+          required
+        >
+
+        <label for="confirmPassword">Confirm password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          placeholder="Enter your password again"
+          autocomplete="new-password"
+          minlength="6"
+          required
+        >
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+        <button
+          id="signupButton"
+          type="submit"
+          style="
+            display: block;
+            width: 100%;
+            min-height: 55px;
+            padding: 18px;
+            background: linear-gradient(100deg, #7763ff, #4a8dff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(119, 99, 255, 0.35);
+          "
+        >
+          Create account →
+        </button>
+      </form>
+
+      <p class="switch">
+        Already have an account?
+        <a href="login.html">Log in</a>
+      </p>
+    </section>
+
+    <p class="footer">
+      Study smarter. Build better habits. ✨
+    </p>
+  </main>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

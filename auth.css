@@ -1,0 +1,171 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(ellipse at top, #20205a 0%, transparent 55%),
+    #070914;
+  color: #f5f7ff;
+}
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 18px;
+}
+
+.brand {
+  color: white;
+  font-size: 32px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -1px;
+  margin-bottom: 25px;
+}
+
+.brand span {
+  color: #8b7cff;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 32px;
+  background: rgba(18, 21, 43, 0.92);
+  border: 1px solid #34365f;
+  border-radius: 22px;
+  box-shadow: 0 20px 70px #0007;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: #25214d;
+  color: #a89bff;
+  font-size: 27px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 27px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #a6abc5;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #353858;
+  background: #0c1020;
+  color: white;
+  outline: none;
+  margin-bottom: 19px;
+  font-size: 14px;
+}
+
+input:focus {
+  border-color: #8b7cff;
+  box-shadow: 0 0 0 3px #8b7cff20;
+}
+
+input::placeholder {
+  color: #707792;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 5px;
+  background: linear-gradient(100deg, #7763ff, #4a8dff);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#message {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: #ffaaaa;
+}
+
+.switch {
+  text-align: center;
+  color: #a6abc5;
+  font-size: 13px;
+  margin-top: 23px;
+}
+
+.switch a {
+  color: #a89bff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer {
+  color: #747b9b;
+  font-size: 12px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+@media (max-width: 420px) {
+  .auth-card {
+    padding: 24px 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+#signupForm #signupButton {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  position: relative;
+  z-index: 10;
+  visibility: visible;
+  opacity: 1;
+}

@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0818">
+  <title>StudyOS - Level Up Your Learning</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#dashboard">
+      <span class="brand-mark">S<span>O</span></span>
+      <span class="brand-name">Study<span>OS</span>
+        <small>YOUR LEARNING SPACE</small>
+      </span>
+    </a>
+
+    <div class="side-label">WORKSPACE</div>
+
+    <nav class="nav-list">
+      <button class="nav-link active" data-view="dashboard">▦ Dashboard</button>
+      <button class="nav-link" data-view="planner">☷ Study Planner <span id="navTaskCount">0</span></button>
+      <button class="nav-link" data-view="timer">◷ Focus Timer</button>
+      <button class="nav-link" data-view="notes">▤ Quick Notes</button>
+      <button class="nav-link" data-view="progress">↗ Progress</button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="side-tip">
+        <strong>✦ Small steps. Big results.</strong>
+        <p>Every focused session is progress. Keep showing up.</p>
+      </div>
+
+      <div class="profile">
+        <div class="avatar">S</div>
+        <div>
+          <strong>Student</strong>
+          <small>Learning mode</small>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-area">
+
+    <header class="topbar">
+      <button class="mobile-menu icon-button" id="menuToggle">☰</button>
+
+      <div class="breadcrumb">
+        Workspace / <strong id="pageCrumb">Dashboard</strong>
+      </div>
+
+      <div class="topbar-right">
+        <span class="today-pill" id="todayLabel">Today</span>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="view active" id="view-dashboard">
+
+      <div class="welcome-row">
+        <div>
+          <div class="eyebrow">YOUR PERSONAL STUDY SPACE</div>
+          <h1>Make today <span class="gradient-text">count.</span></h1>
+          <p class="subheading">A little progress each day adds up to big results.</p>
+        </div>
+
+        <button class="primary-button" data-go="planner">+ Add a task</button>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top">Tasks completed</div>
+          <div class="stat-number" id="statCompleted">0</div>
+          <div class="stat-foot" id="statTaskTotal">0 total tasks</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">Focus time</div>
+          <div class="stat-number"><span id="statFocus">0</span> <small>min</small></div>
+          <div class="stat-foot">Total tracked focus</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">Completion rate</div>
+          <div class="stat-number"><span id="statRate">0</span><small>%</small></div>
+          <div class="stat-foot">Tasks finished</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">Notes saved</div>
+          <div class="stat-number" id="statNotes">0</div>
+          <div class="stat-foot">Your ideas, organized</div>
+        </article>
+      </div>
+
+      <div class="dashboard-grid">
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Today's focus</h2>
+              <p>Your next steps, all in one place.</p>
+            </div>
+            <button class="text-button" data-go="planner">View planner →</button>
+          </div>
+
+          <div id="dashboardTasks" class="task-list"></div>
+
+          <div id="dashboardEmpty" class="empty-state">
+            <strong>Your next win starts here</strong>
+            <p>Add a task to plan your study session.</p>
+          </div>
+        </article>
+
+        <article class="panel focus-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Focus session</h2>
+              <p>Protect your attention.</p>
+            </div>
+          </div>
+
+          <div class="focus-orbit">
+            <div class="timer-core">
+              <span>FOCUS</span>
+              <strong id="dashTimer">25:00</strong>
+              <small id="dashTimerStatus">Ready when you are</small>
+            </div>
+          </div>
+
+          <button class="primary-button full-button" data-go="timer">Start focusing →</button>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Weekly overview</h2>
+              <p>Your focus minutes by day.</p>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="weeklyChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Quick thought</h2>
+              <p>Capture an idea before it disappears.</p>
+            </div>
+          </div>
+
+          <form id="quickNoteForm" class="stack-form">
+            <input id="quickNoteTitle" placeholder="Note title">
+            <textarea id="quickNoteBody" rows="3" placeholder="Write a quick note..."></textarea>
+            <button class="secondary-button" type="submit">Save note +</button>
+          </form>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- STUDY PLANNER -->
+    <section class="view" id="view-planner">
+      <div class="page-intro">
+        <div class="eyebrow">PLAN WITH PURPOSE</div>
+        <h1>Study <span class="gradient-text">Planner.</span></h1>
+        <p class="subheading">Turn your goals into manageable steps.</p>
+      </div>
+
+      <div class="planner-layout">
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Create a task</h2>
+              <p>Make your next study goal concrete.</p>
+            </div>
+          </div>
+
+          <form id="taskForm" class="stack-form">
+            <label for="taskTitle">Task name</label>
+            <input id="taskTitle" required maxlength="120" placeholder="e.g. Revise chemistry">
+
+            <label for="taskSubject">Subject</label>
+            <select id="taskSubject">
+              <option>General</option>
+              <option>Mathematics</option>
+              <option>English</option>
+              <option>Chemistry</option>
+              <option>Biology</option>
+              <option>Physics</option>
+              <option>History</option>
+              <option>ICT</option>
+              <option>Geography</option>
+              <option>Other</option>
+            </select>
+
+            <label for="taskDate">Due date</label>
+            <input id="taskDate" type="date" required>
+
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority">
+              <option value="medium">Medium priority</option>
+              <option value="high">High priority</option>
+              <option value="low">Low priority</option>
+            </select>
+
+            <button class="primary-button full-button" type="submit">+ Add to planner</button>
+          </form>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Your study tasks</h2>
+              <p id="plannerSummary">Stay consistent.</p>
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <button class="filter-chip selected" data-filter="all">All tasks</button>
+            <button class="filter-chip" data-filter="open">To do</button>
+            <button class="filter-chip" data-filter="done">Completed</button>
+          </div>
+
+          <div id="plannerTasks" class="task-list"></div>
+
+          <div id="plannerEmpty" class="empty-state">
+            <strong>No tasks here yet</strong>
+            <p>Add a task to get started.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- FOCUS TIMER -->
+    <section class="view" id="view-timer">
+      <div class="page-intro">
+        <div class="eyebrow">DEEP WORK MODE</div>
+        <h1>Find your <span class="gradient-text">focus.</span></h1>
+        <p class="subheading">Work in focused blocks, then give your brain a break.</p>
+      </div>
+
+      <div class="timer-page-grid">
+        <article class="panel big-timer-panel">
+
+          <div class="timer-mode-tabs">
+            <button class="timer-mode active" data-minutes="25" data-mode="Focus">Focus · 25 min</button>
+            <button class="timer-mode" data-minutes="5" data-mode="Short break">Short break · 5 min</button>
+            <button class="timer-mode" data-minutes="15" data-mode="Long break">Long break · 15 min</button>
+          </div>
+
+          <div class="big-timer-orbit">
+            <div class="big-timer-core">
+              <span id="timerModeLabel">FOCUS SESSION</span>
+              <strong id="mainTimer">25:00</strong>
+              <p id="timerMessage">Ready to make progress?</p>
+            </div>
+          </div>
+
+          <div class="timer-controls">
+            <button class="primary-button" id="timerStart">▶ Start focus</button>
+            <button class="secondary-button" id="timerReset">↻ Reset</button>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Session guide</h2>
+              <p>A simple rhythm for better focus.</p>
+            </div>
+          </div>
+
+          <div class="session-step">
+            <strong>01 — Choose one task</strong>
+            <p>Decide what you want to finish.</p>
+          </div>
+          <div class="session-step">
+            <strong>02 — Focus fully</strong>
+            <p>Work until the timer ends.</p>
+          </div>
+          <div class="session-step">
+            <strong>03 — Take a break</strong>
+            <p>Stretch, drink water, and rest.</p>
+          </div>
+
+          <div class="session-total">
+            Tracked focus time: <strong><span id="timerTotalFocus">0</span> min</strong>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- QUICK NOTES -->
+    <section class="view" id="view-notes">
+      <div class="page-intro notes-intro">
+        <div>
+          <div class="eyebrow">YOUR SECOND BRAIN</div>
+          <h1>Quick <span class="gradient-text">Notes.</span></h1>
+          <p class="subheading">Keep your useful ideas and revision points together.</p>
+        </div>
+        <button class="primary-button" id="newNoteButton">+ New note</button>
+      </div>
+
+      <div id="notesGrid" class="notes-grid"></div>
+
+      <div id="notesEmpty" class="empty-state">
+        <strong>Your notes start here</strong>
+        <p>Save a useful idea or revision point.</p>
+        <button class="primary-button" id="emptyNewNote">+ Create a note</button>
+      </div>
+
+      <article class="panel note-editor hidden" id="noteEditor">
+        <div class="panel-heading">
+          <h2 id="noteEditorHeading">Create a note</h2>
+          <button class="icon-button" id="closeNoteEditor">×</button>
+        </div>
+
+        <form id="noteForm" class="stack-form">
+          <input type="hidden" id="noteId">
+          <label for="noteTitle">Title</label>
+          <input id="noteTitle" required maxlength="100" placeholder="Give your note a title">
+          <label for="noteBody">Content</label>
+          <textarea id="noteBody" required rows="5" maxlength="5000" placeholder="Write your thoughts here..."></textarea>
+
+          <div class="editor-actions">
+            <button type="button" class="secondary-button" id="cancelNote">Cancel</button>
+            <button class="primary-button" type="submit">Save note</button>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <!-- PROGRESS TRACKING -->
+    <section class="view" id="view-progress">
+      <div class="page-intro">
+        <div class="eyebrow">YOUR GROWTH, VISUALIZED</div>
+        <h1>Track your <span class="gradient-text">progress.</span></h1>
+        <p class="subheading">Every completed task is a step forward.</p>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top">Completed tasks</div>
+          <div class="stat-number" id="progressCompleted">0</div>
+          <div class="stat-foot">All-time achievements</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top">Focus minutes</div>
+          <div class="stat-number" id="progressFocus">0</div>
+          <div class="stat-foot">Completed focus sessions</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top">Tasks remaining</div>
+          <div class="stat-number" id="progressRemaining">0</div>
+          <div class="stat-foot">Your next opportunities</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top">Completion rate</div>
+          <div class="stat-number"><span id="progressRate">0</span>%</div>
+          <div class="stat-foot">Of all planner tasks</div>
+        </article>
+      </div>
+
+      <div class="progress-grid">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Focus activity</h2>
+              <p>Minutes logged over the last seven days.</p>
+            </div>
+          </div>
+          <div class="large-chart-wrap">
+            <canvas id="progressChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Task breakdown</h2>
+              <p>How your planner is progressing.</p>
+            </div>
+          </div>
+          <div id="progressBreakdown" class="breakdown-list"></div>
+        </article>
+      </div>
+
+      <div class="progress-footer">
+        <span>✦ Progress is built one session at a time.</span>
+        <button class="text-button" id="exportData">Export my data ↓</button>
+        <button class="text-button danger-text" id="clearData">Reset all data</button>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <span>StudyOS · Built for your next breakthrough.</span>
+      <span>Focus on progress, not perfection.</span>
+    </footer>
+
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<dialog id="confirmDialog" class="confirm-dialog">
+  <form method="dialog">
+    <h2 id="dialogTitle">Are you sure?</h2>
+    <p id="dialogMessage">This action cannot be undone.</p>
+    <div class="dialog-actions">
+      <button class="secondary-button" value="cancel">Cancel</button>
+      <button class="primary-button" id="dialogConfirm" value="confirm">Confirm</button>
+    </div>
+  </form>
+</dialog>
+
+</body>
+</html>
